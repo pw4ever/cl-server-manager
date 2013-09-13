@@ -39,12 +39,13 @@
 
 ;;
 (defun shutdown-server (&key name &allow-other-keys)
-  "Stop all PORTS of the server with NAME and remove it."
+  "Stop all PORTS of the server with NAME and remove it; return the STOP result for the PORTS."
   (multiple-value-bind (server presentp) (gethash name *servers*)
     (when presentp
-      (loop for port being each hash-key of (server-ports server) do
-	   (stop server port))
-      (remove-server :name name))))
+      (let ((replies (loop for port being each hash-key of (server-ports server) 
+			collect (stop server port))))
+	(remove-server :name name)
+	replies))))
 
 
 ;;; port management
@@ -159,8 +160,11 @@
 
 (defun register-server-vendor-by-type (server-type vendor vendor-info)
   "Register server vendor by type."
-  (setf (gethash vendor (gethash server-type *server-types*)) vendor-info))
+  (setf (gethash vendor (gethash server-type *server-types*)) 
+	vendor-info))
 
 (defun list-server-vendors ()
   "List registered server vendors."
-  (loop for server-type being each hash-key of *server-types* collect (list server-type (hash-table-keys (gethash server-type *server-types*)))))
+  (loop for server-type being each hash-key of *server-types* 
+     collect (list server-type 
+		   (hash-table-keys (gethash server-type *server-types*)))))
