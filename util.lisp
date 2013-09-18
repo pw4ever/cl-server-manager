@@ -18,5 +18,6 @@
 (defun shutdown-all-servers ()
   "Shutdown all servers."
   (let ((replies (list)))
-    (loop for server in (list-servers) do (shutdown-server :name server))
+    (loop for server in (list-servers) do
+	  (appendf replies (list (shutdown-server :name server))))
     replies))
