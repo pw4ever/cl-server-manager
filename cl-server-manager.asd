@@ -15,15 +15,19 @@
   :components (
 	       (:file "package")
 	       (:file "manager")
-
-	       (:file "server-console")
-	       (:file "server-http")
-	       (:file "server-https")
-
-	       (:file "server-console-swank")
-	       (:file "server-http-hunchentoot")
-	       (:file "server-https-hunchentoot")
-
                (:file "util")
+
+	       (:module types
+			:components (
+				     (:file "console")
+				     (:file "http")
+				     (:file "https")
+				     ))
+
+	       (:module vendors
+			:components (
+				     (:file "swank")
+				     (:file "hunchentoot")
+				     ))
 	       ))
 

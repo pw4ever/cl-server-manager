@@ -8,14 +8,15 @@
    #:list-servers
    #:find-server
    #:remove-server
-   #:shutdown
+   #:shutdown-server
 
-   #:start
-   #:status
-   #:stop
    #:list-ports
    #:find-port
    #:remove-port
+
+   #:start
+   #:query
+   #:stop
 
    #:list-server-types
    #:register-server-vendor-by-type
