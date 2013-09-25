@@ -13,7 +13,7 @@
 			  :name :http
 			  :make-server-initargs nil
 			  :port 8085
-			  :start-initargs (list :acceptor-class 'hunchentoot:acceptor))
+			  :start-initargs (list :acceptor-class 'hunchentoot:easy-acceptor))
 
 ;;; https
 (register-server-vendor-by-type :https :hunchentoot "http://weitz.de/hunchentoot/")
@@ -24,7 +24,7 @@
 			  :name :https
 			  :make-server-initargs nil
 			  :port 8086
-			  :start-initargs (list :acceptor-class 'hunchentoot:ssl-acceptor :ssl-certificate-file *default-https-server-certificate-pathname* :ssl-privatekey-file *default-https-server-privatekey-pathname*))
+			  :start-initargs (list :acceptor-class 'hunchentoot:easy-ssl-acceptor :ssl-certificate-file *default-https-server-certificate-pathname* :ssl-privatekey-file *default-https-server-privatekey-pathname*))
 
 
 ;;; server-port operations
