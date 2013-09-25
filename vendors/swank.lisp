@@ -4,6 +4,8 @@
 (defclass swank (server-console) 
   ((port-pathname :accessor port-pathname :initarg :port-pathname :initform nil
 		  :documentation "pathname to save port")))
+(export 'swank)
+
 (register-server-vendor-by-type :console :swank "http://common-lisp.net/project/slime/")
 (set-server-type-defaults :console
 			  :class 'swank

@@ -146,10 +146,12 @@
 
 (defmacro define-server-type-with-defaults (server-type &rest args)
   "Define SERVER-TYPE with defaults."
-  `(progn (defclass ,(intern (concatenate 'string (symbol-name :server-) (symbol-name server-type))) (server) ())
-	  (set-server-type-defaults ,server-type ,@args)
-	  (multiple-value-bind (vendors presentp) (gethash ,server-type *server-types*)
-	    (unless presentp (setf (gethash ,server-type *server-types*) (make-hash-table :test 'equal))))))
+  (let ((server-class (symbolicate :server- server-type)))
+    `(progn (defclass ,server-class (server) ())
+	    (export ',server-class)
+	    (set-server-type-defaults ,server-type ,@args)
+	    (multiple-value-bind (vendors presentp) (gethash ,server-type *server-types*)
+	      (unless presentp (setf (gethash ,server-type *server-types*) (make-hash-table :test 'equal)))))))
 
 
 ;;; server types and vendors

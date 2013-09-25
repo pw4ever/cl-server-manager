@@ -4,6 +4,7 @@
 
 
 (defclass hunchentoot (server-http server-https) ())
+(export 'hunchentoot)
 
 ;;; http
 (register-server-vendor-by-type :http :hunchentoot "http://weitz.de/hunchentoot/")

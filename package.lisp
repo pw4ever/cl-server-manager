@@ -4,6 +4,8 @@
    #:alexandria
    )
   (:export
+   #:server
+
    #:make-server
    #:list-servers
    #:find-server
