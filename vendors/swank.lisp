@@ -36,7 +36,7 @@
 (defmethod query ((server swank) (port integer) &rest args &key &allow-other-keys))
 
 (defmethod stop ((server swank) (port integer) &rest args &key &allow-other-keys)
-  (swank:stop-server port)
+  (apply #'swank:stop-server port args)
   (let ((port-pathname (port-pathname server)))
     (when (and port-pathname (probe-file port-pathname))
       (delete-file port-pathname))))

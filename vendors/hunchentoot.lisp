@@ -37,6 +37,6 @@
 (defmethod query ((server hunchentoot) (port integer) &rest args &key &allow-other-keys))
 
 (defmethod stop ((server hunchentoot) (port integer) &rest args &key &allow-other-keys)
-  (hunchentoot:stop (find-port :name (server-name server) :port port)))
+  (apply #'hunchentoot:stop (find-port :name (server-name server) :port port) args))
 
 
